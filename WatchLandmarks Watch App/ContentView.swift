@@ -6,19 +6,23 @@
 //
 
 import SwiftUI
+import UserNotifications
 
 struct ContentView: View {
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            LandmarkList()
+                .task {
+                    let center = UNUserNotificationCenter.current()
+                    _ = try? await center.requestAuthorization(
+                        options: [.alert, .sound, .badge]
+                    )
+                }
         }
-        .padding()
     }
 }
 
 #Preview {
     ContentView()
+        .environment(ModelData())
 }
