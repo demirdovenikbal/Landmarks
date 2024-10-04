@@ -15,6 +15,14 @@ struct MapView: View {
             span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2)
         )
     }
+    enum Zoom: String, CaseIterable, Identifiable {
+        case near = "Near"
+        case medium = "Medium"
+        case far = "Far"
+        var id : Zoom {
+            return self
+        }
+    }
     var coordinate : CLLocationCoordinate2D
     var body: some View {
         Map(position: .constant(.region(region)))
